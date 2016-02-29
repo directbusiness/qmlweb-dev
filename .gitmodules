@@ -1,0 +1,3 @@
+[submodule "shorty"]
+	path = shorty
+	url = https://github.com/qmlweb/shorty.git
