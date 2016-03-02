@@ -10,7 +10,6 @@ Loader{
     }
 
     function grab(){
-
         var path = source.toString()
             .replace(".qml", ".png")
             .replace("file://", "")
