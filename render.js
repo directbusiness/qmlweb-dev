@@ -8,7 +8,9 @@ var glob = require("glob");
 var devPath = __dirname.split("/").pop();
 
 var paths = [
-  "tests/Render/Simple/*.qml"
+  "tests/Render/Simple/*.qml",
+  "tests/QtQuick/qml/TextBasic.qml",
+  "tests/QtQuick/qml/RectangleColor.qml"
 ];
 
 paths.forEach(function(path) {

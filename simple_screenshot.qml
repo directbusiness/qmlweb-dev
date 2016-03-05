@@ -5,25 +5,31 @@ Loader{
     Component.onCompleted: {
         console.log("completed")
         console.log(script)
-        timer.start()
-
+        //timer.start()
+        //Qt.quit()
     }
 
-    function grab(){
+    function grab(tag){
         var path = source.toString()
-            .replace(".qml", ".png")
+            .replace(".qml", "")
             .replace("file://", "")
-        console.log("grab" + path)
-        shorty.shootFull(path)
+        if(tag)
+          path = path + "-" + tag
+        console.log("grab" + path + ".png")
+        shorty.shootFull(path+ ".png")
     }
+    function done(){
+      Qt.quit()
+    }
+    onLoaded: {
+      timer.start()
+    }
+
     Timer{
         id: timer
         interval: 10
         onTriggered: {
-          grab()
-          Qt.quit()
+          item.test()
         }
     }
 }
-
-
