@@ -9,7 +9,7 @@ Loader{
         //Qt.quit()
     }
 
-    function grab(tag){
+    function testScreenshot(tag, next){
         var path = source.toString()
             .replace(".qml", "")
             .replace("file://", "")
@@ -17,11 +17,16 @@ Loader{
           path = path + "-" + tag
         console.log("grab" + path + ".png")
         shorty.shootFull(path+ ".png")
+        next()
     }
-    function done(){
+    function testDone(){
       Qt.quit()
     }
+    function testYield()
+    {
+    }
     onLoaded: {
+      console.log("load")
       timer.start()
     }
 
