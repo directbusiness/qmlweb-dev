@@ -4,8 +4,11 @@ SOURCES = *.qml \
         ../tests/Render/Async/*.qml \
         ../tests/QtQuick/qml/*.qml \
         ../tests/QMLEngine/qml/*.qml \
+        ../tests/Tests/*.qml \
 //}
 
 DISTFILES += \
-    ../tests/Render/Async/tester.qml
+    ../tests/Render/Async/tester.qml \
+    TestCase2.qml \
+    Describe.qml
 
