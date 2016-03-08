@@ -3,13 +3,14 @@
  */
 var fs = require('fs');
 var exec = require("child_process").execFileSync;
+var execAsync = require("child_process").execFile;
 var glob = require("glob");
 
 var devPath = __dirname.split("/").pop();
+var loader = "tests/qtloader.qml";
 var paths = [
-  "tests/Render/Simple/*.qml",
-  "tests/QtQuick/qml/TextBasic.qml",
-  "tests/QtQuick/qml/RectangleColor.qml"
+  "tests/Tests/TestCase.qml",
+  "tests/Tests/SimpleRenderTest.qml"
 ];
 
 function isRenderTest(file, callback) {
@@ -27,23 +28,45 @@ function isRenderTest(file, callback) {
 }
 
 paths.forEach(function(path) {
-  glob(path, function(er, files) {
-    files.forEach(render);
-  });
-  glob("tests/**/*.qml", function(er, files) {
-    files.forEach(function(file) {
-      isRenderTest(file, function() { render(file); });
-    });
-  });
+//  glob(path, function(er, files) {
+  //  console.log(path)
+    render(path);
+  //});
+  // glob("tests/**/*.qml", function(er, files) {
+  //   files.forEach(function(file) {
+  //     isRenderTest(file, function() { render(file); });
+  //   });
+  // });
 });
 
-function render(path) {
-  console.log(path);
-  var png = path.replace(".qml", ".png");
-  try {
-    fs.accessSync(png, fs.F_OK);
-  } catch (e) {
-    exec(devPath + "/bin/shorty", [devPath + "/simple_screenshot.qml", path]);
-  }
 
+function render(path) {
+  //console.log(path);
+  var png = path.replace(".qml", ".png");
+  execRender(devPath + "/bin/shorty", loader, path);
+  // try {
+  //   fs.accessSync(png, fs.F_OK);
+  // } catch (e) {
+  //   exec(devPath + "/bin/shorty", [devPath + "/simple_screenshot.qml", path]);
+  // }
+  // console.log(cwd)
+  // console.log(devPath + "/bin/shorty")
+  //
+  // var files = [devPath + loader , devPath + path.replace("/", "\\")]
+  // console.log(files)
+  // execAsync(devPath + "\\bin\\shorty", files, function(err, stdout, stderr){
+  //   console.log(err);
+  //   console.log(stdout);
+  //   console.log(stderr);
+  // });
+  //console.log(output.toString('ascii'))
+}
+
+function execRender(shorty, loader, file){
+  //console.log(shorty, loader, file)
+  //shorty = shorty.replace("/", "\\");
+  //loader = loader.replace("/", "\\");
+  //file = file.replace("/", "\\");
+  console.log(shorty, loader, file)
+  exec(shorty, [loader, file]);
 }
