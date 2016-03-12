@@ -42,12 +42,10 @@ bool fileExists(QString path) {
 void Screenshot::shootFull(const QString &name, QQuickWindow *view)
 {
 
-    qDebug() << "Shoot full: " << name;
-    if(fileExists(name)) return;
+    qDebug() << "Shoot: " << name;
+    //if(fileExists(name)) return;
     QImage image = view->grabWindow();
-    qDebug() << "Grabbed";
     image.save(name);
-    qDebug() << "Saved";
 }
 
 void Screenshot::shoot(const QString &name, QQuickWindow *view)

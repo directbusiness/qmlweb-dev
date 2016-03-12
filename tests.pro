@@ -1,17 +1,18 @@
-//lupdate_only {
-SOURCES = *.qml \
+DISTFILES = *.qml \
         ../tests/Render/Simple/*.qml \
         ../tests/Render/Async/*.qml \
         ../tests/QtQuick/qml/*.qml \
         ../tests/QMLEngine/qml/*.qml \
         ../tests/Tests/*.qml \
+        ../tests/Tests/qml/*.qml \
+        ../tests/qml/*.qml
         ../tests/*.qml
-//}
 
-DISTFILES += \
-    ../tests/Render/Async/tester.qml \
-    TestCase2.qml \
-    Describe.qml
+}
+
+
+
+
 
 
 

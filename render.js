@@ -2,15 +2,15 @@
  * Created by henrikrudstrom on 29.02.16.
  */
 var fs = require('fs');
-var exec = require("child_process").execFileSync;
-var execAsync = require("child_process").execFile;
+var execFile = require("child_process").execFileSync;
+var exec = require("child_process").execSync;
 var glob = require("glob");
 
 var devPath = __dirname.split("/").pop();
-var loader = "tests/qtloader.qml";
+var loader = "dev/loader.qml";
 var paths = [
-  "tests/Tests/TestCase.qml",
-  "tests/Tests/SimpleRenderTest.qml"
+  "tests/Tests/qml/*.qml",
+  //"tests/Tests/SimpleRenderTest.qml"
 ];
 
 function isRenderTest(file, callback) {
@@ -26,24 +26,31 @@ function isRenderTest(file, callback) {
   });
 
 }
+if(process.argv.length == 2){
+  paths.forEach(function(paths) {
+    glob(paths, function(er, files) {
 
-paths.forEach(function(path) {
-//  glob(path, function(er, files) {
-  //  console.log(path)
-    render(path);
-  //});
-  // glob("tests/**/*.qml", function(er, files) {
-  //   files.forEach(function(file) {
-  //     isRenderTest(file, function() { render(file); });
-  //   });
-  // });
-});
+      files.forEach(function(file) {
+        console.log("Rendering " + file)
+        render(file);
+      });
+    });
+    // glob("tests/**/*.qml", function(er, files) {
+    //   files.forEach(function(file) {
+    //     isRenderTest(file, function() { render(file); });
+    //   });
+    // });
+  });
+} else if (process.argv.length == 3){
+  render(process.argv[2])
+}
 
 
 function render(path) {
   //console.log(path);
   var png = path.replace(".qml", ".png");
-  execRender(devPath + "/bin/shorty", loader, path);
+  execRender(devPath + "/bin/qtqmltest", loader, path);
+  exec("sleep 1")
   // try {
   //   fs.accessSync(png, fs.F_OK);
   // } catch (e) {
@@ -63,10 +70,6 @@ function render(path) {
 }
 
 function execRender(shorty, loader, file){
-  //console.log(shorty, loader, file)
-  //shorty = shorty.replace("/", "\\");
-  //loader = loader.replace("/", "\\");
-  //file = file.replace("/", "\\");
   console.log(shorty, loader, file)
-  exec(shorty, [loader, file]);
+  execFile(shorty, [loader, file]);
 }
