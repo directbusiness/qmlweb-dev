@@ -73,7 +73,7 @@ Window {
                 //.replace("file:///", "") //only on windows
                 .replace("file://", "")
             if(tag)
-                path = path + "-" + tag
+                path = path + "-" + tag.replace(" ", "_")
 
             if(!render){
                 console.log("LOG: skip render" + path)

@@ -5,7 +5,7 @@ DISTFILES = *.qml \
         ../tests/QMLEngine/qml/*.qml \
         ../tests/Tests/*.qml \
         ../tests/Tests/qml/*.qml \
-        ../tests/qml/*.qml
+        ../tests/common/*.qml
         ../tests/*.qml
 
 }
