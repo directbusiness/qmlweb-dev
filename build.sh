@@ -3,5 +3,5 @@ git submodule update
 rm -rf build
 mkdir build
 cd build
-qmake ../shorty
+qmake ../qtqmltest
 make
